@@ -35,7 +35,10 @@ namespace AdministrationsAPp
             ToUserButton.Click += ToUserButton_Click;
             ToAdminButton.Click += ToAdminButton_Click;
             AdminLB.SelectionChanged += AdminLB_SelectionChanged;
+            AdminLB.GotFocus += AdminLB_GotFocus;
             UserLB.SelectionChanged += UserLB_SelectionChanged;
+            UserLB.GotFocus += UserLB_GotFocus;
+
 
             // Set the source for the ListBoxes and choose display value
             UserLB.ItemsSource = normalUsers;
@@ -44,6 +47,16 @@ namespace AdministrationsAPp
             UserLB.DisplayMemberPath = "UserName";
             AdminLB.DisplayMemberPath = "UserName";
 
+        }
+
+        private void AdminLB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UserLB.SelectedItem = null;
+        }
+
+        private void UserLB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            AdminLB.SelectedItem = null;
         }
 
         private void ToAdminButton_Click(object sender, RoutedEventArgs e)
@@ -135,7 +148,8 @@ namespace AdministrationsAPp
         {
             AdminLB.Items.Refresh();
             UserLB.Items.Refresh();
-
+            AdminLB.SelectedItem = null;
+            UserLB.SelectedItem = null;
         }
 
         private void UserLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
