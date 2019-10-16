@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace AdministrationsAPp
 {
@@ -25,7 +13,7 @@ namespace AdministrationsAPp
         internal List<User> normalUsers = new List<User>();
         internal List<User> adminUsers = new List<User>();
 
-        bool userLBSelected = true;
+        bool userLBSelected;
 
         public MainWindow()
         {
@@ -55,11 +43,13 @@ namespace AdministrationsAPp
         private void AdminLB_GotFocus(object sender, RoutedEventArgs e)
         {
             UserLB.SelectedItem = null;
+            userLBSelected = false;
         }
 
         private void UserLB_GotFocus(object sender, RoutedEventArgs e)
         {
             AdminLB.SelectedItem = null;
+            userLBSelected = true;
         }
 
         private void ToOtherListButton_Click(object sender, RoutedEventArgs e)
