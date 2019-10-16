@@ -16,10 +16,11 @@
         <ListBox x:Name="AdminLB" HorizontalAlignment="Left" Height="200" Margin="250,200,0,0" VerticalAlignment="Top" Width="120" />
         <Button x:Name="ToAdminButton" Content="&gt;" HorizontalAlignment="Left" Margin="200,205,0,0" VerticalAlignment="Top" Width="20" IsEnabled="False"/>
         <Button x:Name="ToUserButton" Content="&lt;" HorizontalAlignment="Left" Margin="200,305,0,0" VerticalAlignment="Top" Width="20" IsEnabled="False"/>
-        <Label x:Name="NormalEmailLabel" Content="User Email:" HorizontalAlignment="Left" Margin="50,170,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="AdminEmailLabel" Content="Admin Email:" HorizontalAlignment="Left" Margin="250,170,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Användare:" HorizontalAlignment="Left" Margin="50,170,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Admininstratörer:" HorizontalAlignment="Left" Margin="250,170,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Namn:" HorizontalAlignment="Left" Margin="50,74,0,0" VerticalAlignment="Top"/>
         <Label Content="Epost:" HorizontalAlignment="Left" Margin="250,74,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="SelectedUserLbl" Content="Vald användare:" HorizontalAlignment="Left" Margin="400,238,0,0" VerticalAlignment="Top" Height="162" Width="109"/>
 
     </Grid>
 </Window>

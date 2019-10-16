@@ -24,6 +24,9 @@ namespace AdministrationsAPp
     {
         internal List<User> normalUsers = new List<User>();
         internal List<User> adminUsers = new List<User>();
+
+        bool userLBSelected = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,8 +35,8 @@ namespace AdministrationsAPp
             CreateButton.Click += CreateButton_Click;
             DeleteButton.Click += DeleteButton_Click;
             ChangeButton.Click += ChangeButton_Click;
-            ToUserButton.Click += ToUserButton_Click;
-            ToAdminButton.Click += ToAdminButton_Click;
+            ToUserButton.Click += ToOtherListButton_Click;
+            ToAdminButton.Click += ToOtherListButton_Click;
             AdminLB.SelectionChanged += AdminLB_SelectionChanged;
             AdminLB.GotFocus += AdminLB_GotFocus;
             UserLB.SelectionChanged += UserLB_SelectionChanged;
@@ -59,6 +62,34 @@ namespace AdministrationsAPp
             AdminLB.SelectedItem = null;
         }
 
+        private void ToOtherListButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (userLBSelected)
+            {
+                if ((UserLB.SelectedItem as User) != null)
+                {
+                    adminUsers.Add(UserLB.SelectedItem as User);
+                    normalUsers.Remove(UserLB.SelectedItem as User);
+                    ListBoxRefresh();
+                    ToAdminButton.IsEnabled = false;
+                }
+                DeleteButton.IsEnabled = false;
+                ChangeButton.IsEnabled = false;
+            }
+            else
+            {
+                if ((AdminLB.SelectedItem as User) != null)
+                {
+                    normalUsers.Add(AdminLB.SelectedItem as User);
+                    adminUsers.Remove(AdminLB.SelectedItem as User);
+                    ListBoxRefresh();
+                    ToUserButton.IsEnabled = false;
+                }
+                DeleteButton.IsEnabled = false;
+                ChangeButton.IsEnabled = false;
+            }
+
+        }
         private void ToAdminButton_Click(object sender, RoutedEventArgs e)
         {
             if ((UserLB.SelectedItem as User) != null)
@@ -156,7 +187,9 @@ namespace AdministrationsAPp
         {
             try
             {
-                NormalEmailLabel.Content = "User Email: " + (UserLB.SelectedItem as User).UserEmail;
+                SelectedUserLbl.Content = "Vald användare:\n" +
+                    "Namn: " + (UserLB.SelectedItem as User).UserName + "\n" +
+                    "Epost: " + (UserLB.SelectedItem as User).UserEmail;
                 NameTB.Text = (UserLB.SelectedItem as User).UserName;
                 EmailTB.Text = (UserLB.SelectedItem as User).UserEmail;
 
@@ -167,7 +200,7 @@ namespace AdministrationsAPp
             }
             catch
             {
-                NormalEmailLabel.Content = "User Email: ";
+                SelectedUserLbl.Content = "Vald användare: ";
                 NameTB.Text = null;
                 EmailTB.Text = null;
             }
@@ -177,7 +210,9 @@ namespace AdministrationsAPp
         {
             try
             {
-                AdminEmailLabel.Content = "Admin Email: " + (AdminLB.SelectedItem as User).UserEmail;
+                SelectedUserLbl.Content = "Vald användare:\n" +
+                    "Namn: " + (AdminLB.SelectedItem as User).UserName + "\n" +
+                    "Epost: " + (AdminLB.SelectedItem as User).UserEmail;
                 NameTB.Text = (AdminLB.SelectedItem as User).UserName;
                 EmailTB.Text = (AdminLB.SelectedItem as User).UserEmail;
 
@@ -188,7 +223,7 @@ namespace AdministrationsAPp
             }
             catch
             {
-                AdminEmailLabel.Content = "Admin Email:";
+                SelectedUserLbl.Content = "Vald användare:";
                 NameTB.Text = null;
                 EmailTB.Text = null;
             }
